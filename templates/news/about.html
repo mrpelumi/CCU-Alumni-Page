@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <section class="hero-wrap hero-wrap-2" >
+      <div class="overlay news-single" style="background:#87330099;opacity:1;"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">ABOUT CCU ALUMNI</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+		<section class="ftco-section ftco-no-pt ftc-no-pb">
+			<div class="container">
+				<div class="row d-flex">
+					<!-- <div class="col-md-5 order-md-last wrap-about wrap-about d-flex align-items-stretch">
+						<div class="img aboutimg" style="background-image: url( {% static 'images/nysc/nysc_7.jpg' %} );"></div>
+					</div> -->
+					<div class="col-md-10 wrap-about py-5 pr-md-4 ftco-animate">
+          	<!-- <h2 class="mb-4">Coal City University Alumni</h2> -->
+						<p>
+              {{ ccu_alumni.body }}
+            </p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		{% include 'footer.html' %}
+{% endblock %}
+   

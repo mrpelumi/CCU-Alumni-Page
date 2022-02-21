@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <section class="hero-wrap hero-wrap-2" >
+      <div class="overlay news-single" style="background:#87330099;opacity:1;"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">ALUMNI NEWS</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row">
+          
+          {% for news in news_list %}
+          {% if forloop.counter < 10 %}</h1>
+          <div class="col-md-6 col-lg-4 ftco-animate news-margin">
+            <div class="blog-entry">
+              <a href="{{ news.get_absolute_url }}" class="block-20 d-flex align-items-end news-div" style="background-image: url('{{ news.news_img.url }}');">
+                <div class="meta-date text-center p-2">
+                  <span class="day">{{ news.upload_date|date:"d" }}</span>
+                  <span class="mos">{{ news.upload_date|date:"M" }}</span>
+                  <span class="yr">{{ news.upload_date|date:"Y" }}</span>
+                </div> 
+              </a>
+              <div class="text bg-white p-4 news-box">
+                <h3 class="heading"><a href="#">{{ news.title }}</a></h3>
+                <p>{{ news.newsletter|truncatewords:25 }}</p>
+                <div class="d-flex align-items-center mt-4">
+                  <p class="mb-0"><a href="#" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          
+        </div>
+      </div>
+    </section>
+
+    {% if is_paginated %}
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-numbers"><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+      <li class="disabled page-numbers"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="active page-numbers"><span>{{ i }} <span class="sr-only">(current)</span> </span></li>
+        {% else %}
+        <li class="page-numbers"><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <li class="disabled page-numbers"><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+
+    {% include 'footer.html' %}
+{% endblock %}

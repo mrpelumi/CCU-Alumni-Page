@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <section class="home-slider owl-carousel">
+    {% for item in "x"|ljust:"1" %}
+    <div class="slider-item" style="background-image:url({% static 'images/graduation.jpg' %} );">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
+          <div class="col-md-6 ftco-animate heading-alumni">
+            <h1 class="mb-4 intro-header">CCU ALUMNI ASSOCIATION</h1>
+            <p>{{ ccualumni_body.body|truncatewords:40 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </section>
+
+  <!-- CCU Alumni Unit -->
+	<section class="about-area section-gap">
+		<div class="container">
+			<div class="row align-items-center justify-content-center">
+				<div class="col-lg-5 col-md-6 about-left news-div">
+					<img class="img-fluid ccu-img index-img" src="{% static 'images/aboutgrad.jpg' %} " alt="">
+				</div>
+				<div class="offset-lg-1 col-lg-6 offset-md-0 col-md-12 about-right">
+          <br>
+          <div class="col-md-8 text-center heading-section ftco-animate alumni-box">
+            <h2 class="mb-4 alumni-unit">CCU ALUMNI UNIT</h2>
+          </div>
+					<div class="wow fadeIn" data-wow-duration="1s">
+						<p>{{ ccualumni_body.body|truncatewords:70 }}</p>
+					</div>
+					<a href="{% url 'about_us' %}" class="btn btn-outline-danger allnews-btn find-btn alumni-btn">Find Out More <span class="ion-ios-arrow-round-forward"></span></a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+  <!-- Latest News Section -->
+
+  <section class="ftco-section bg-light index-news">
+    <div class="container">
+      <div class="row justify-content-center mb-5 pb-2">
+        <div class="col-md-8 text-center heading-section ftco-animate ">
+          <h2 class="mb-4 header-font"><span>LATEST NEWS</span></h2>
+        </div>
+      </div>
+      <div class="row">
+        
+        {% for news in news_list %}
+        {% if forloop.counter < 4 %}</h1>
+        <div class="col-md-6 col-lg-4 ftco-animate">
+          <div class="blog-entry">
+            <a href="{{ news.get_absolute_url }}" class="block-20 d-flex align-items-end news-div" style="background-image: url('{{ news.news_img.url }}');">
+              <div class="meta-date text-center p-2">
+                <span class="day">{{ news.upload_date|date:"d" }}</span>
+                <span class="mos">{{ news.upload_date|date:"M" }}</span>
+                <span class="yr">{{ news.upload_date|date:"Y" }}</span>
+              </div> 
+            </a>
+            <div class="text bg-white p-4 news-box">
+              <h3 class="heading"><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></h3>
+              <p>{{ news.newsletter|truncatewords:30 }}</p>
+              <div class="d-flex align-items-center mt-4">
+                <p class="mb-0"><a href="{{ news.get_absolute_url }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        
+      </div>
+      <div class="news-btn">
+        <p class="mb-0"><a href="{% url 'news_list_page' %}" class="btn btn-outline-danger allnews-btn">SEE ALL NEWS <span class="ion-ios-arrow-round-forward"></span></a></p>
+      </div>
+      
+    </div>
+  </section>
+
+
+  <!-- Upcoming Events -->
+
+  <section class="ftco-section bg-light index-event">
+    <div class="container">
+      <div class="row justify-content-center mb-5 pb-2">
+        <div class="col-md-8 text-center heading-section ftco-animate">
+          <h2 class="mb-4 header-font"><span>UPCOMING EVENTS</span></h2>
+        </div>
+      </div>
+      <div class="row">
+        {% for event in events_list %}
+        {% if forloop.counter < 4 %}</h1>
+        <div class="col-md-6 col-lg-4 ftco-animate">
+          <div class="blog-entry">
+            <header class="news-div">
+                
+              <a href="blog-single.html" class="block-20 d-flex align-items-end event-img" style="background-image: url('{{ event.event_img.url }}');"></a>
+              <section class="header-text">
+                <p class="event-date">{{ event.event_date|date:"d" }}</p>
+                <p class="event-month">{{ event.event_date|date:"M" }}, {{ event.event_date|date:"Y" }} </p>
+              </section>
+                
+            </header>
+            
+            <div class="text bg-white p-4 news-box">
+              <p>{{ event.title|upper }}</p>
+              <p>{{ event.start_time|time:"H:i" }}P.M - {{ event.end_time|time:"H:i" }}P.M</p>
+              {% if event.speaker %}
+                <p>Speaker: {{ event.speaker }}</p>
+              {% endif %}
+
+              {% if event.Venue %}
+                <p>Venue: {{ event.Venue }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        
+      </div>
+      <div class="news-btn">
+        <p class="mb-0"><a href="{% url 'events' %}" class="btn btn-outline-danger allnews-btn">SEE ALL EVENTS <span class="ion-ios-arrow-round-forward"></span></a></p>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Testimony Section  -->
+  <section class="ftco-section testimony-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5 pb-2">
+        <div class="col-md-8 text-center heading-section ftco-animate">
+          <h2 class="mb-4 header-font">TESTIMONIALS</h2>
+        </div>
+      </div>
+      <div class="row ftco-animate justify-content-center">
+        <div class="col-md-12">
+          <div class="carousel-testimony owl-carousel">
+            {% for testimony in testimonies %}
+            {% if forloop.counter < 4 %}
+            <div class="item">
+              <div class="testimony-wrap d-flex">
+                <div class="user-img mr-4" style="background-image: url({{ testimony.student_img.url }})">
+                </div>
+                <div class="text ml-2">
+                  {% comment %} <span class="quote d-flex align-items-center justify-content-center">
+                    <i class="icon-quote-left"></i>
+                  </span> {% endcomment %}
+                  <p>{{ testimony.body }}</p>
+                  <p class="name">{{ testimony.student_name }}</p>
+                  <span class="position">{{ testimony.department }}</span>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="ftco-gallery">
+    <div class="container-wrap">
+      <div class="row no-gutters">
+        {% for picture in pictures %}
+        {% if forloop.counter < 5 %}
+        <div class="col-md-3 ftco-animate">
+          <a href="{{ picture.image.url }}" class="gallery image-popup img d-flex align-items-center" style="background-image: url({{ picture.image.url }});">
+            <div class="icon mb-4 d-flex align-items-center justify-content-center">
+              <span class="icon-instagram"></span>
+            </div>
+          </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  {% include 'footer.html' %}
+{% endblock %}
+
+

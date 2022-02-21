@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}News Article{% endblock %}
+
+{% block content %}
+  {{ news.title }}
+  <br>
+  {{ news.newsletter }}
+  <br>
+  <img src="{{ news.news_img.url }}" alt="" />
+{% endblock %}

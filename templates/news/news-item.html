@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <section class="hero-wrap hero-wrap-2" >
+      <div class="overlay news-single" style="background:#87330099;opacity:1;"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">CCU ALUMNI NEWS</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+		<section class="ftco-section news-section">
+			<div class="container">
+				<div class="row">
+          <div class="col-lg-8 ftco-animate">
+            <p>
+              <img src="{{ news.news_img.url }} " alt="" class="img-fluid news-item-img">
+            </p>
+            <h2 class="mb-3">{{ news.title }}</h2>
+            <p>{{ news.newsletter }}</p>
+            <!-- <div class="tag-widget post-tag-container mb-5 mt-5">
+              <div class="tagcloud">
+                <a href="#" class="tag-cloud-link">Life</a>
+                <a href="#" class="tag-cloud-link">Sport</a>
+                <a href="#" class="tag-cloud-link">Tech</a>
+                <a href="#" class="tag-cloud-link">Travel</a>
+              </div>
+            </div> -->
+
+          </div> <!-- .col-md-8 -->
+
+          <div class="col-lg-4 sidebar ftco-animate">
+            <!-- <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon icon-search"></span>
+                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                </div>
+              </form>
+            </div> -->
+
+            <div class="sidebar-box ftco-animate">
+              <h3>Latest News</h3>
+              {% for news_item in news_list %}
+              {% if news.newsletter|length < 1500 %}
+              {% if forloop.counter < 6 %}
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url({{ news_item.news_img.url }});"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="{{ news_item.get_absolute_url }}">{{ news_item.title}}</h3>
+                  <div class="meta">
+                    <div><span class="icon-calendar"></span> {{ news_item.upload_date|date:"d" }} {{ news_item.upload_date|date:"M" }}, {{ news_item.upload_date|date:"Y" }}</div>
+                  </div>
+                </div>
+              </div>
+              <hr style="height: 3px;">
+              {% endif %}
+              {% elif news.newsletter|length > 1500 %}
+              {% if forloop.counter < 10 %}
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url({{ news_item.news_img.url }});"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="{{ news_item.get_absolute_url }}">{{ news_item.title}}</h3>
+                  <div class="meta">
+                    <div><span class="icon-calendar"></span> {{ news_item.upload_date|date:"d" }} {{ news_item.upload_date|date:"M" }}, {{ news_item.upload_date|date:"Y" }}</div>
+                  </div>
+                </div>
+              </div>
+              <hr style="height: 3px;">
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+          </div><!-- END COL -->
+        </div>
+			</div>
+		</section>
+
+    {% include 'footer.html' %}
+    {% endblock %}
+
+    
+

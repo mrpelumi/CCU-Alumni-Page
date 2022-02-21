@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <section class="hero-wrap hero-wrap-2" >
+      <div class="overlay news-single" style="background:#87330099;opacity:1;"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">PHOTO GALLERY</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section">
+			<div class="container-fluid px-4">
+				<div class="row">
+					{% for picture in pictures %}
+					{% if forloop.counter < 10 %}
+					<div class="col-md-3 course ftco-animate">
+						<div class="img" style="background-image: url({{ picture.image.url }});"></div>
+						<div class="text pt-4">
+							<p class="meta d-flex">
+								<span><i class="icon-user mr-2"></i>{{ picture.image_name }}</span>
+								<!-- <span><i class="icon-table mr-2"></i>10 seats</span>
+								<span><i class="icon-calendar mr-2"></i>4 Years</span> -->
+							</p>
+							</div>
+					</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+		{% if is_paginated %}
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-numbers"><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+      <li class="disabled page-numbers"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="active page-numbers"><span>{{ i }} <span class="sr-only">(current)</span> </span></li>
+        {% else %}
+        <li class="page-numbers"><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <li class="disabled page-numbers"><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+
+    {% include 'footer.html' %}
+
+{% endblock %}

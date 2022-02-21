@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="hero-wrap hero-wrap-2" >
+      <div class="overlay news-single" style="background:#87330099;opacity:1;"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">ALUMNI OFFICIALS</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+			<div class="container-fluid px-4">
+				<div class="row">
+					{% for member in members_list %}
+					<div class="col-md-6 col-lg-3 ftco-animate">
+						<div class="staff">
+							<div class="img-wrap d-flex align-items-stretch">
+								<div class="img align-self-stretch" style="background-image: url({{ member.member_img.url }});"></div>
+							</div>
+							<div class="text pt-3 text-center">
+								<h3>{{ member.member_name }}</h3>
+								<span class="position mb-2">{{ member.member_position }}</span>
+								<div class="faded">
+									
+									<ul class="ftco-social text-center">
+		                <li class="ftco-animate"><a href="{{ member.twitter_url }}"><span class="icon-twitter"></span></a></li>
+		                <li class="ftco-animate"><a href="{{ member.facebook_url }}"><span class="icon-facebook"></span></a></li>
+		                <li class="ftco-animate"><a href="{{ member.instagram_url }}"><span class="icon-instagram"></span></a></li>
+		              </ul>
+	              </div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+		{% include 'footer.html' %}
+
+{% endblock %}
+   
